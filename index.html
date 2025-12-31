@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Dev Portfolio - Coming Soon!</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+            animation: glow 2s infinite alternate;
+        }
+        p {
+            font-size: 1.5em;
+            margin-bottom: 1em;
+        }
+        .ai-bot {
+            font-size: 2em;
+            animation: bounce 1s infinite;
+        }
+        /* Neural network background */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.5;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #00ffcc; }
+            to { text-shadow: 0 0 20px #00ffcc; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="neuralNetwork"></canvas>
+    <div class="container">
+        <h1>AI Dev Portfolio</h1>
+        <p>Building intelligent things... Coming soon!</p>
+        <div class="ai-bot">🤖</div>
+        <p>Meanwhile, check out my GitHub: <a href="https://github.com/yourusername" style="color: #00ffcc;">yourusername</a></p>
+    </div>
+    <script>
+        // Simple neural network visualization
+        const canvas = document.getElementById('neuralNetwork');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const nodes = [];
+        for (let i = 0; i < 20; i++) {
+            nodes.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height
+            });
+        }
+
+        function drawNetwork() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#00ffcc';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    if (Math.random() > 0.7) { // Random connections
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.stroke();
+                    }
+                }
+                ctx.beginPath();
+                ctx.arc(nodes[i].x, nodes[i].y, 5, 0, Math.PI * 2);
+                ctx.fillStyle = '#00ffcc';
+                ctx.fill();
+            }
+            requestAnimationFrame(drawNetwork);
+        }
+        drawNetwork();
+    </script>
+</body>
+  </html>
