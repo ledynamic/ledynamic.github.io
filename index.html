@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - AI Developer Portfolio</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f1e;
+            color: #e0e0ff;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        header {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, #1e1e3f, #2a1e5c);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        h1 {
+            font-size: 4em;
+            margin: 0;
+            text-shadow: 0 0 20px #a78bff, 0 0 40px #7b5eff;
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 10px #a78bff; }
+            to { text-shadow: 0 0 30px #7b5eff, 0 0 50px #a78bff; }
+        }
+        h2 {
+            color: #a78bff;
+            margin: 60px 0 30px;
+        }
+        section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .project-card {
+            background: #1e1e3f;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 30px #7b5eff;
+        }
+        button {
+            background: #7b5eff;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 40px;
+            box-shadow: 0 0 20px #a78bff;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #a78bff;
+            transform: scale(1.1);
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="particles"></canvas>
+
+    <header>
+        <h1>Your Name</h1>
+        <p style="font-size:1.5em; margin:20px;">AI Developer & Machine Learning Enthusiast</p>
+        <p>Building intelligent systems that think, learn, and occasionally hallucinate 🤖</p>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I'm an AI developer passionate about LLMs, computer vision, and generative models. I love turning data into magic.</p>
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="projects">
+            <div class="project-card">
+                <h3>Chatbot with Custom LLM</h3>
+                <p>A fine-tuned language model for domain-specific conversations.</p>
+                <a href="#" style="color:#a78bff;">View on GitHub →</a>
+            </div>
+            <div class="project-card">
+                <h3>Image Generation Tool</h3>
+                <p>Stable Diffusion wrapper with custom prompts and upscaling.</p>
+                <a href="#" style="color:#a78bff;">Live Demo →</a>
+            </div>
+            <div class="project-card">
+                <h3>AI-Powered Recommendation Engine</h3>
+                <p>Built with PyTorch for personalized suggestions.</p>
+                <a href="#" style="color:#a78bff;">Code →</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Get in Touch</h2>
+        <p>Email: your@email.com | GitHub: @yourusername | LinkedIn: /in/yourprofile</p>
+        <button onclick="launchConfetti()">Launch Confetti! 🎉</button>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // Simple falling AI-themed particles
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const emojis = ['🤖', '🧠', '🔥', '⚡', '🚀'];
+        const particles = [];
+
+        for (let i = 0; i < 50; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: 20 + Math.random() * 20,
+                speed: 1 + Math.random() * 2,
+                emoji: emojis[Math.floor(Math.random() * emojis.length)]
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.font = p.size + 'px serif';
+                ctx.fillText(p.emoji, p.x, p.y);
+                p.y += p.speed;
+                if (p.y > canvas.height) p.y = -50;
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Confetti fun
+        function launchConfetti() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#7b5eff', '#a78bff', '#e0e0ff']
+            });
+        }
+    </script>
+</body>
+</html>
